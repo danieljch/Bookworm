@@ -11,11 +11,14 @@ struct ContentView: View {
     @State private var rememberMe = false
 
     var body: some View {
-        Toggle("Remember Me", isOn: $rememberMe)
+        VStack {
+                   PushButton(title: "Remember Me", isOn: $rememberMe)
+                   Text(rememberMe ? "On" : "Off")
+               }
     }
     struct PushButton: View {
         let title: String
-        @State var isOn: Bool
+        @Binding var isOn: Bool
 
         var onColors = [Color.red, Color.yellow]
         var offColors = [Color(white: 0.6), Color(white: 0.4)]
