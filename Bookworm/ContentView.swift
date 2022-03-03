@@ -22,7 +22,7 @@ struct ContentView: View {
                             EmojiRatingView(rating: book.rating)
                                 .font(.largeTitle)
                             VStack{
-                                Text(book.title ?? "Unknown Title")
+                                Text(book.title ?? "Unknown title")
                                     .font(.headline)
                                 Text(book.author ?? "Unknown Author")
                                     .foregroundColor(.secondary)
