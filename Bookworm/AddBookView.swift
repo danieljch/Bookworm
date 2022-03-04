@@ -16,12 +16,18 @@ struct AddBookView: View {
     @State private var genre = ""
     @State private var review = ""
     let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
+    var saveButtonIsEnabled : Bool {
+        if title.isEmpty || author.isEmpty {
+            return false
+        }
+        return true
+    }
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Name of book", text: $title)
-                    TextField("Author's name", text: $author)
+                    TextField("Name of book, required", text: $title)
+                    TextField("Author's name, required", text: $author)
 
                     Picker("Genre", selection: $genre) {
                         ForEach(genres, id: \.self) {
@@ -46,12 +52,17 @@ struct AddBookView: View {
                         newBook.title = title
                         newBook.author = author
                         newBook.rating = Int16(rating)
-                        newBook.genre = genre
+                        
+                        if !genre.isEmpty {
+                            newBook.genre = genre
+                        } else {
+                            newBook.genre = "Unknown"
+                        }
                         newBook.review = review
                         
                         try? moc.save()
                         dismiss()
-                    }
+                    }.disabled(saveButtonIsEnabled == false)
                 }
             }
             .navigationTitle("Add Book")
