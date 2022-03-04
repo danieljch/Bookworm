@@ -56,7 +56,7 @@ struct AddBookView: View {
                         if !genre.isEmpty {
                             newBook.genre = genre
                         } else {
-                            newBook.genre = "Unknown"
+                            newBook.genre = "Unknown genre"
                         }
                         newBook.review = review
                         newBook.date = Date.now
