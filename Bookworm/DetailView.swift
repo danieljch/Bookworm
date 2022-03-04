@@ -17,7 +17,7 @@ struct DetailView: View {
         
         ScrollView {
             ZStack(alignment: .bottomTrailing) {
-                Image(book.genre ?? "Fantasy")
+                Image(book.genre ?? "Unknown")
                     .resizable()
                     .scaledToFit()
 
