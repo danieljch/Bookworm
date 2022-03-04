@@ -59,7 +59,7 @@ struct AddBookView: View {
                             newBook.genre = "Unknown"
                         }
                         newBook.review = review
-                        
+                        newBook.date = Date.now
                         try? moc.save()
                         dismiss()
                     }.disabled(saveButtonIsEnabled == false)

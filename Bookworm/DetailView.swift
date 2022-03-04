@@ -12,6 +12,7 @@ struct DetailView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     @State private var showingDeleteAlert = false
+    
     var body: some View {
         
         ScrollView {
@@ -36,9 +37,15 @@ struct DetailView: View {
 
             Text(book.review ?? "No review")
                 .padding()
-
+            
             RatingView(rating: .constant(Int(book.rating)))
                 .font(.largeTitle)
+            if let dateBook = book.date  {
+                Text("Date:" + dateFormat(date:dateBook))
+            } else {
+                Text("Date: Unknown")
+            }
+            
         }
         .navigationTitle(book.title ?? "Unknown Book")
         .navigationBarTitleDisplayMode(.inline)
@@ -60,9 +67,14 @@ struct DetailView: View {
     func deleteBook() {
         moc.delete(book)
 
-        // uncomment this line if you want to make the deletion permanent
-        // try? moc.save()
+        try? moc.save()
         dismiss()
+    }
+    func dateFormat(date: Date)-> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        
+        return formatter.string(from: date)
     }
 }
 
